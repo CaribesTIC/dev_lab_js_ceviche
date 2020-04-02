@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.create(Object.prototype, {})</h1>
+  <p>
+Esta es una tercera forma de crear un objeto, permitiendo además definir sus
+propiedades y cuál será su prototype. El prototype de un objeto es otro objeto, el
+cual guardará las propiedades y métodos que compartirá con el objeto a crear.
+<br/><br/>
+Este método toma dos parámetros. El primero es el prototype del objeto,
+mientras que el segundo es un objeto plano que enumera las propiedades que
+tendrá el nuevo objeto. Este segundo parámetro tiene la misma forma que el
+segundo parámetro de Object.defineProperties.
+<br/><br/>
+Object.create es útil para definir prototipos, sobre todo si tienen
+propiedades especiales (por ejemplo, dinámicos o de solo lectura).
+  </p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var dish = Object.create( Object.prototype, {
+    name: {
+        value: '',
+        writable: true,
+        configurable: false
+    },
+    ingredients: {
+        value: [],
+        writable: true,
+        configurable: false
+    },
+    garnishes: {
+        value: [],
+        writable: true,
+        configurable: true
+    },
+    diners: {
+        value: 1,
+        writable: true,
+        configurable: false
+    }
+});
+
+function consoleShow(){
+    dish.name = 'Ceviche simple';
+    console.log('respuesta: ', dish.name); // "Ceviche simple"
+    dish.ingredients.push('1 kilo de pescado');
+    console.log('respuesta: ', dish.ingredients);// 1
+}
+</script>
+</body>
+</html>

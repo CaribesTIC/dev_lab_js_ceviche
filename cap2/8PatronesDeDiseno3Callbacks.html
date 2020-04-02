@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+<h2>Callbacks</h2>
+<p>
+Un callback es una función pasada como parámetro en otra función, la cual
+ejecuta el callback luego de haber realizado sus propias operaciones.
+Usualmente los callbacks son funciones anónimas.
+<br/><br/>
+Este extiende el <i>prototype</i> de <code style="font-size:14px;">Array</code> para crear el método 
+<code style="font-size:14px;">each</code>:
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<script>
+
+if (!Array.prototype.each) { // como es un objeto nativo, se verifica que el método no exista antes de crearlo
+
+    Array.prototype.each = function (callback) { 
+
+        if (callback instanceof Function) { // luego, se verifica que el callback sea una función
+
+            for (var i = 0; i < this.length; i++) {   
+                // el callback de Array.prototype.each puede recibir 2 argumentos: elemento e índice   
+                callback.call(this[i], this[i], i);
+
+            }
+
+        }
+
+    };
+
+}
+
+//[0, 1, 2, 3, 4, 5].each(function(item, index) {
+[0, 10, 20, 30, 40, 50].each(function(item, index) {
+
+    console.log(item.toString(2), index);
+
+});
+//// "0" 0
+//// "1" 1
+//// "10" 2
+//// "11" 3
+//// "100" 4
+//// "101" 5
+
+//0      0  
+//1010   1  
+//10100  2  
+//11110  3  
+//101000 4  
+//110010 5
+
+</script>
+</body>
+</html>

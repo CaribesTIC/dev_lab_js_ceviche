@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+<h1>Object.seal</h1>
+<p>Sella un objeto, negando la capacidad del objeto de tener nuevas propiedades y
+de tener propiedades configurables.</p>
+  <h2>Object.isSealed</h2>
+  <p>Verifica si el objeto está sellado. Un objeto está sellado si no es extensible
+( Object.isExtensible devolviendo false ) y si ninguna de sus propiedades
+son configurables.</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+function consoleShow(){
+    var object = {};
+    console.log( 'respuesta: ', Object.isSealed(object) ); // true
+    Object.seal(object);
+    console.log( 'respuesta: ', Object.isSealed(object) ); // false
+}
+</script>
+</body>
+</html>

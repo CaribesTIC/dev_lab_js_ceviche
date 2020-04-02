@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+
+  <h2>Closure</h2>
+
+<p>
+Sin embargo, de ser necesario, el closure puede ser devuelto por la función
+externa, y aún tener acceso al ámbito de esa función (incluso después de haber
+ejecutado dicha función).
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+En este caso, la función <code style="font-size:14px;">buildTitle</code> tiene definidos dos closures:
+<code style="font-size:14px;">getSeparator</code> y <code style="font-size:14px;">addPart</code>. 
+A diferencia del ejemplo anterior, <code style="font-size:14px;">buildTitle</code>
+devuelve el closure <code style="font-size:14px;">addPart</code> , por lo que, al guardar el valor devuelto en la
+variable <code style="font-size:14px;">builder</code>, este se vuelve una referencia del closure <code style="font-size:14px;">addPart</code> . Como los closures guardan acceso del ámbito de su función externa, aún después de haber
+sido ejecutadas, puede recrear el título del sitio utilizando la variable <code style="font-size:14px;">parts</code>,
+que a su vez ha sido modificada por el closure.
+</p>
+
+<script>
+
+function titleBuilder() {
+
+    var baseTitle = 'La Buena Espina';
+    var parts = [baseTitle];
+
+    function getSeparator() {
+
+        if (parts.length == 2) {
+            return ' — ';
+        } else {
+            return ' › ';
+        }
+
+    };
+
+    function addPart(part) {
+
+        parts.push(part);
+        return parts.join(getSeparator());
+
+    };
+
+    return addPart;
+};
+
+var builder = titleBuilder();
+
+console.log(builder('Carta')); // "La Buena Espina — Carta"
+
+console.log(builder('Pescados')); // "La Buena Espina › Carta › Pescados"
+
+console.log(builder('Ceviches')); // "La Buena Espina › Menú › Pescados › Ceviches"
+
+</script>
+</body>
+</html>

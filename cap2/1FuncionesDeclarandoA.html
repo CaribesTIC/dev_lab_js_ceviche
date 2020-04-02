@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones</h1>
+  <p>
+Con lo aprendido en el capítulo anterior has iniciado con buen pie la tarea
+de desarrollar el sitio web de La Buena Espina, pero aún tienes camino por
+recorrer si deseas crear un sitio web fácilmente mantenible en el futuro.
+<br/><br/>
+Para lograr una buena estructura en cualquier tipo de proyecto es
+necesario hacer uso de algunos patrones de diseño, que son soluciones
+probadas a situaciones comunes en todo tipo de sitio o aplicación web.
+<br/><br/>
+Estos patrones utilizan funciones a un nivel más avanzado de lo visto en el
+capítulo anterior, que es justo de lo que trata esta parte.
+  </p>
+<p>
+  <h2>Funciones tipo A</h2>
+Las funciones en JavaScript también son objetos, por lo que tienen propiedades
+y métodos. Además de ser objetos, son llamadas ciudadanos de primera clase
+(First-class citizen), el tipo de estructura más importante en un lenguaje, así que
+pueden ser pasadas como parámetros (callbacks), ser asignadas a una variable
+(constructores y funciones anónimas) o ser retornadas por otra función
+(closures).
+<br/></br/>
+En JavaScript se pueden crear funciones de 3 formas:
+A. Declarando una función, con la sentencia function :
+</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+function sum(a, b) {
+    return a + b;
+};
+
+function consoleShow() {    
+    console.log('respuesta: ', sum(1, 2) );
+}
+</script>
+</body>
+</html>

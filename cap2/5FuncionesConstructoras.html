@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones constructoras</h1>
+<p>
+Las funciones constructoras permiten definir una especie de “clase” en
+JavaScript, con la cual luego se pueden instanciar objetos que tengan
+propiedades y métodos en común.
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<script>
+
+function Dish(options) {
+    this.name = options.name;
+    this.ingredients = options.ingredients;
+    this.garnishes = options.garnishes;
+    this.diners = options.diners;
+};
+
+var cevicheSimple = new Dish({
+    name: 'Ceviche simple',
+    ingredients: [
+        '1 kilo de pescado',
+        '2 cebollas',
+        '1 taza de jugo de limón',
+        '1 ají limo',
+        'sal'
+    ],
+    garnishes: [
+        'lechuga (2 hojas por plato)',
+        'maíz cancha',
+        '4 porciones de yuca',
+        '4 choclos sancochados',
+        'camote sancochado en rodajas (2 por plato)'
+    ],
+    diners: 4
+});
+
+console.log('cevicheSimple: ', cevicheSimple );
+// Dish {name: "Ceviche simple", ingredients: Array[5], garnishes: Array[5], diners: 4}
+
+console.log('cevicheSimple instanceof Dish: ', cevicheSimple instanceof Dish );
+// true
+
+</script>
+</body>
+</html>

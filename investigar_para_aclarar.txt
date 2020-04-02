@@ -1,0 +1,33 @@
+Object
+
+Object.create
+Object.defineProperty
+Object.defineProperties
+Object.preventExtensions
+Object.freeze
+Object.seal
+Object.getOwnPropertyNames
+Object.getPrototypeOf
+Object.isExtensible
+Object.isFrozen
+Object.isSealed
+Object.keys
+
+function
+
+Scope y context
+Funciones anónimas
+Funciones inmediatamente invocadas
+Funciones constructoras
+Objeto prototype
+Extendiendo objetos nativos
+
+Patrones de diseño
+
+Closure
+Module
+Callbacks
+Publish / Subscribe
+
+
+

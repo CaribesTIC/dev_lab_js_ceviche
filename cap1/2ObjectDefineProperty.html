@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.defineProperty</h1>
+<p>
+Crea o modifica una propiedad en un objeto. A diferencia de la manipulación de
+propiedades mediante asignación con punto o corchetes, este método permite
+tener un control más avanzado de cómo se podrá manipular la propiedad.
+<br/><br/>
+Cuando se define una propiedad con Object.defineProperty , por defecto no
+es ni enumerable ni configurable ni grabable(excepto en Chrome, donde por
+defecto sí es grabable).
+<br/><br/>
+Este método recibe 3 parámetros: el objeto a modificar, la propiedad a definir y 
+el descriptor de la propiedad. Un descriptor de propiedad puede ser de dos tipos:
+<ul>
+    <li>Descriptor de datos: para propiedades que tienen un valor
+        <ul>
+            <li>value : El valor asignado por defecto a la propiedad. Este valor puede ser de cualquier tipo.</li>
+            <li>writable : Valor booleano que define si la propiedad es grabable o no.</li>
+        </ul>
+    </li>
+    <li>Descriptor de acceso: para definir métodos de acceso ( get y set ).      
+        <ul>
+            <li>get : Si está definida, esta función se ejecutará al intentar acceder a la propiedad.</li>
+            <li>set : Si está definida, esta función se ejecutará al intentar asignar un valor a la propiedad.</li>
+        </ul>
+    </li>
+</ul>
+Ambos tipos de descriptores comparten dos atributos con valores booleanos: configurable y enumerable.
+</p>
+
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var siteTitle = {};
+
+Object.defineProperty(siteTitle, 'internalValue', {
+    writable: true, // internalValue podrá cambiar de valor
+    configurable: false, // internalValue podrá cambiar de valor pero no ser eliminado del objeto
+    enumerable: true // internalValue aparecerá en Object.keys o usando for..in
+});
+
+siteTitle.internalValue = {};
+
+function consoleShow(){
+    console.log('respuesta: ', siteTitle);// 1
+}
+</script>
+</body>
+</html>

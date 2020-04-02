@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+C. Cuando la función solo es una función (creada de las 3 formas explicadas
+anteriormente), el contexto es el contexto global, el cual en navegadores es 
+<code style="font-size:14px;">window</code>.
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<script>
+
+function globalContext1() {
+    console.log('context1: ', this);
+};
+
+var globalContext2 = function() {
+    console.log('context2: ', this);
+};
+
+var globalContext3 = new Function("console.log('context3: ', this);");
+
+globalContext1(); 
+// context1: Window {top: Window, window: Window, location: Location, external: Object, chrome: Object...}
+
+globalContext2();
+// context2: Window {top: Window, window: Window, location: Location, external: Object, chrome: Object...}
+
+globalContext3(); 
+// context3: Window {top: Window, window: Window, location: Location, external: Object, chrome: Object...}
+
+</script>
+</body>
+</html>

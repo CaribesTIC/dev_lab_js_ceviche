@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Extendiendo objetos nativos</h1>
+<p>
+Extender el <i>prototype</i> de una función no está limitado a las funciones
+constructoras propias, ya que también se pueden extender los prototypes de
+funciones nativas, como <code style="font-size:14px;">String</code>,
+<code style="font-size:14px;">Number</code>,
+<code style="font-size:14px;">Date</code> o
+<code style="font-size:14px;">Array</code>, entre otros.
+<br/><br/>
+Esta posibilidad permite mejorar, en cierto sentido, el lenguaje y dotar a los
+objetos de métodos utilitarios. Un ejemplo de esto se da en la biblioteca Sugar.js,
+la cual extiende los objetos nativos de JavaScript para simplificar y automatizar
+algunas operaciones comunes como son operaciones entre arreglos, manejar
+cadenas, números o fechas.
+<br/><br/>
+Sin embargo, también existe la posibilidad de extender el <i>prototype</i> de objetos
+que están definidos en el entorno en el cual el programa está ejecutándose,
+como los que se utilizan en el Document Object Model (la interfaz en JavaScript
+para manipular HTML). Estos objetos son denominados <i>host objects</i>, debido a
+que su implementación depende del entorno en el que se ejecuta JavaScript.
+<br/><br/>
+Mientras que los objetos nativos ( 
+<code style="font-size:14px;">String</code>,
+<code style="font-size:14px;">Number</code>,
+<code style="font-size:14px;">Date</code> o o
+<code style="font-size:14px;">Array</code>) están
+explícitamente especificados por ECMA, con ECMAScript, los <i>host objects</i>
+difieren entre implementaciones ya que sus especificaciones no son tan
+explícitas e interpretadas a libertad por quien decida ejecutar JavaScript en su
+propio entorno.
+<br/><br/>
+Es precisamente por la falta de explicitud en la especificación de los <i>host objects</i>
+que extender sus <i>prototypes</i> no solamente es recomendable, si no que se evita a
+toda costa, ya que su comportamiento varía entre implementaciones (es decir,
+entre navegadores). Mayores detalles se pueden encontrar en "What's wrong
+with extending the DOM".
+<br/><br/>
+Otra de los situaciones que sucede al extender objetos nativos es el hecho que
+algun nuevo método a implementar pueda ser implementado nativamente en
+una siguiente versión del lenguaje. El caso más llamativo es el de los métodos
+para manipular arreglos, como <code style="font-size:14px;">forEach</code> o 
+<code style="font-size:14px;">map</code>, los cuales fueron agregados en
+las últimas versiones de navegadores como Chrome o Firefox. Esto es fácilmente
+solucionable verificando que el método no exista antes de implementarlo en el
+<i>prototype</i> del constructor.
+</p>
+<h2>¿Por qué no se debería extender <code style="font-size:20px;">Object?</code></h2>
+
+<p>
+Como se detalló en el capítulo anterior, cada nueva propiedad de un objeto es
+<strong>enumerable</strong>. Esto quiere decir que si se agrega un nuevo método al <i>prototype</i> de
+<code style="font-size:14px;">Object</code>, esta aparecerá cuando se iteren las propiedades de un objeto con
+<code style="font-size:14px;">for..in</code>. (un método en JavaScript no es más que una propiedad cuyo valor es
+una función):
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+
+<script>
+
+Object.prototype.superMethod = function() {
+    return 'instance of Object';
+};
+
+console.log(Object.superMethod());
+
+var obj = {}; // un objeto plano es una instancia de Object
+
+for (var property in obj) {
+    console.log(property); // superMethod
+}
+
+
+var string = ""; // una cadena también es una instancia de Object
+
+for (var property in string) {
+    console.log(property); // superMethod
+}
+
+</script>
+</body>
+</html>

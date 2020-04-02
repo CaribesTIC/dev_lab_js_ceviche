@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+B. Cuando la función es una función constructora, el contexto de dicha función
+es el objeto instanciado usando dicha función:
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<script>
+
+var Constructor = function Constructor(newValue) {
+
+    this.property = newValue;
+    console.log('this context: ', this);
+
+};
+
+var obj = new Constructor('value'); // this context: Constructor {property: "value"}
+
+//obj.property = 'value'; 
+
+console.log('obj context: ', obj); // obj context: Constructor {property: "value"}
+
+</script>
+</body>
+</html>

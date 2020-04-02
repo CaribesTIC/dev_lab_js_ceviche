@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.getOwnPropertyNames</h1>
+  <p>
+  Lista todas las propiedades (incluyendo métodos) de un objeto, sean estos enumerables o no.
+  </p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var siteTitle = Object.create(String.prototype, {
+    internalValueNumber1: {
+        enumerable: false,
+        writable: true,
+        configurable: false
+    },
+    internalValueNumber2: {
+        enumerable: false,
+        writable: true,
+        configurable: false
+    }
+});
+
+function consoleShow(){
+    console.log('respuesta: ', Object.getOwnPropertyNames(siteTitle));
+}
+</script>
+</body>
+</html>

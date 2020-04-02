@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+<code style="font-size:14px;">apply</code> tiene una ventaja con respecto a 
+<code style="font-size:14px;">call</code>, que es permitir pasar los
+argumentos de forma dinámica. En el caso de <code style="font-size:14px;">call</code>,
+cada parámetro debe ser pasado dentro del método, como un parámetro más; en el caso de 
+<code style="font-size:14px;">apply</code>, solo basta agregar un elemento en el segundo
+parámetro, que es un arreglo.
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+
+<script>
+
+function buildSiteTitle(part1, part2) {
+    return part1 + ' — ' + part2;
+};
+
+var titleParts = [];
+
+titleParts.push('La Buena Espina');
+
+console.log('respuesta: ', buildSiteTitle.apply(null, titleParts) );
+// "La Buena Espina — undefined"
+
+titleParts.push('Historia');
+
+console.log('respuesta: ', buildSiteTitle.apply(null, titleParts) );
+// "La Buena Espina — Historia"
+
+</script>
+</body>
+</html>

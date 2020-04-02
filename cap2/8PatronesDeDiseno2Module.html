@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+
+  <h2>Module</h2>
+
+<p>
+Un módulo utiliza las funciones inmediatamente invocadas y los closures para
+encapsular el comportamiento de una función y hacer públicos solo la funciones
+que se consideren necesarios, mientras que el resto de operaciones y variables
+quedan inaccesibles.
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+Un módulo es un función inmediatamente invocada, la cual devuelve un objeto.
+Este objeto, a su vez, contiene closures con acceso al ámbito de la función
+inmediatamente invocada y a sus variables internas. Sin embargo, quedan
+variables, como <code style="font-size:14px;">parts</code> , 
+que no pueden manipularse fuera del módulo (excepto al usar el closure 
+<code style="font-size:14px;">addPart</code> ), 
+así como funciones, como <code style="font-size:14px;">getSeparator</code> que no
+pueden ser utilizadas fuera del módulo.
+</p>
+<script>
+
+var titleBuilder = (function() {
+
+    var baseTitle = 'La Buena Espina';
+    var parts = [baseTitle];
+
+    function getSeparator() {
+
+        if (parts.length == 2) {
+            return ' — ';
+        } else {
+            return ' › ';
+        }
+    };
+
+    return {
+        reset: function() {
+            parts = [baseTitle];
+        },
+        addPart: function(part) {
+            parts.push(part);
+        },
+        toString: function() {
+            return parts.join(getSeparator());
+        }
+    };
+})();
+
+console.log( titleBuilder ); // Object {reset: function, addPart: function, toString: function}
+
+console.log( titleBuilder.toString() ); // "La Buena Espina"
+
+titleBuilder.addPart('Carta'); 
+
+titleBuilder.addPart('Pescados');
+
+titleBuilder.addPart('Ceviches');
+
+console.log( titleBuilder.toString() ); // "La Buena Espina › Carta › Pescados › Ceviches"
+
+titleBuilder.reset();
+
+console.log( titleBuilder.toString() ); // "La Buena Espina"
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

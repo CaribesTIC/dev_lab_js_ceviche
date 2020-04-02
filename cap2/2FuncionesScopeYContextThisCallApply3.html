@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+Esta flexibilidad al momento de pasar los argumentos en una función se ve
+limitada hasta este punto. Es aquí donde se empieza a utilizar la palabra
+reservada <code style="font-size:14px;">arguments</code>, el cual es un objeto
+que representa a los argumentos de la función que se está ejecutando en ese instante.
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<p>
+Cabe notar que aunque <code style="font-size:14px;">arguments</code> tiene una propiedad
+llamada <code style="font-size:14px;">length</code> y puede ser iterada mediante una estructura
+<code style="font-size:14px;">for</code> , no es un arreglo, si no un objeto cuyas propiedades
+son los argumentos de la función, y donde el nombre de cada propiedad es un índice que
+empieza en 0 y termina en un número igual a <code style="font-size:14px;">length</code> menos uno.
+</p>
+<script>
+
+function buildSiteTitle() { // Ya no es necesario definir los parámetros
+
+    var separator = ' — ';
+    var title = '';
+
+    if (arguments.length > 2) {  // arguments tiene una propiedad llamada length
+        separator = ' › ';
+    }
+
+    for (var i = 0; i < arguments.length; i++) {
+
+        if (i == 0) { // La primera parte del título no debe tener separador
+            title += arguments[i]; 
+        } else {
+            title += separator + arguments[i];
+        }
+
+    }
+
+    return title;
+};
+
+console.log('respuesta: ', buildSiteTitle.apply(null, ['La Buena Espina', 'Historia']) );
+// "La Buena Espina — Historia"
+console.log('respuesta: ', buildSiteTitle.apply(null, ['La Buena Espina', 'Carta', 'Ceviches']) );
+// "La Buena Espina › Carta › Ceviches"
+
+</script>
+</body>
+</html>

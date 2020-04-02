@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+<h2>Publish / Subscribe</h2>
+<p>
+El patrón publish / subscribe permite la comunicación entre objetos de forma
+asíncrona y define dos tipos de objetos: aquel que se suscribe a un canal
+(<i>subscriber</i>) y aquel que envía el mensaje (<i>publisher</i>). Cada suscripción permite
+definir un callback que se ejecutará cuando el objeto <i>publisher</i> envíe un mensaje
+en el canal el objeto <i>subscriber</i> está suscrito.
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+Este patrón se utiliza en casos donde se requiera condicionar la ejecución de una
+o más de una acción a la ejecución de otra previamente.
+</p>
+<script>
+
+var SiteNotifier = (function() { // Este patrón utiliza el patrón módulo...
+    var channels = {};
+    return {
+        subscribe: function(channelName, callback) { // ...con 2 closures: subscribe y publish
+            if (channels[channelName] === undefined) { // en subscribe verifica si el canal existe
+                channels[channelName] = []; // y si no, lo inicializa como un array vacío
+            }
+            if (callback instanceof Function) {       // al ser un closure tiene acceso
+                channels[channelName].push(callback); //a la variable channels del ámbito externo
+            }
+        },
+        publish: function(channelName, message) {
+            if (channels[channelName] instanceof Array) { // solo se ejecutará si el valor del canal es un array
+                var subscribers = channels[channelName];
+                for (var i = 0; i < subscribers.length; i++) { // itera a través de todos los suscriptores (callbacks)...
+                    var callback = subscribers[i];
+                    callback.call(null, message); // ...y las ejecuta sin contexto, pasándole el mensaje como parámetro
+                }
+            }
+        }
+    };
+})();
+
+
+// La ventaja de utilizar este patrón radica en que se pueden
+//asignar más de un callback a una acción (o canal)
+
+SiteNotifier.subscribe('site_title:changed', function(message) {
+    console.log(message.oldTitle, ' → ', message.newTitle);
+});
+
+SiteNotifier.subscribe('site_title:changed', function(message) {
+    document.title = message.newTitle;
+});
+
+document.title; // ""  En el caso de una ventana o pestaña nueva, esta no tiene título
+
+var message = { oldTitle: 'La Buena Espina', newTitle: 'Bienvenidos a La Buena Espina' };
+
+SiteNotifier.publish('site_title:changed', message); // "La Buena Espina → Bienvenidos a La Buena Espina"
+
+console.log(document.title); // "Bienvenidos a La Buena Espina"
+
+</script>
+</body>
+</html>

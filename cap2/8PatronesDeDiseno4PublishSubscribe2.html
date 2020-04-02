@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+<h2>Publish / Subscribe</h2>
+<p>
+Por ejemplo, si quisiera
+automatizar el cambio de título de la ventana al pasar de una sección a otra,
+podría utilizar <code style="font-size:14px;">SiteNotifier</code> dentro del módulo <code style="font-size:14px;">titleBuilder</code>:
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+De esta forma, cada vez que agregue una parte al título (con <code style="font-size:14px;">addPart</code> ), o la
+devuelva a su estado original (con <code style="font-size:14px;">reset</code>), se ejecutarán los callbacks suscritos
+al canal <code style="font-size:14px;">site_title:changed</code>.
+</p>
+<script>
+
+var SiteNotifier = (function() { // Este patrón utiliza el patrón módulo...
+    var channels = {};
+    return {
+        subscribe: function(channelName, callback) { // ...con 2 closures: subscribe y publish
+            if (channels[channelName] === undefined) { // en subscribe verifica si el canal existe
+                channels[channelName] = []; // y si no, lo inicializa como un array vacío
+            }
+            if (callback instanceof Function) {       // al ser un closure tiene acceso
+                channels[channelName].push(callback); //a la variable channels del ámbito externo
+            }
+        },
+        publish: function(channelName, message) {
+            if (channels[channelName] instanceof Array) { // solo se ejecutará si el valor del canal es un array
+                var subscribers = channels[channelName];
+                for (var i = 0; i < subscribers.length; i++) { // itera a través de todos los suscriptores (callbacks)...
+                    var callback = subscribers[i];
+                    callback.call(null, message); // ...y las ejecuta sin contexto, pasándole el mensaje como parámetro
+                }
+            }
+        }
+    };
+})();
+
+var titleBuilder = (function() {
+    var baseTitle = 'La Buena Espina';
+    var parts = [baseTitle];
+    function getSeparator() {
+        if (parts.length == 2) {
+            return ' — ';
+        } else {
+            return ' › ';
+        }
+    };
+    return {
+        reset: function() {
+            var message = {
+                oldTitle: this.toString()
+            };
+            parts = [baseTitle];
+            message.newTitle = this.toString();
+            SiteNotifier.publish('site_title:changed', message);
+        },
+        addPart: function(part) {
+            var message = {
+                oldTitle: this.toString()
+            };
+            parts.push(part);
+            message.newTitle = this.toString();
+            SiteNotifier.publish('site_title:changed', message);
+        },
+        toString: function() {
+            return parts.join(getSeparator());
+        }
+    };
+})();
+
+SiteNotifier.subscribe('site_title:changed', function(message) {
+    // en vez de mostrar en la consola se puede cambiar el título de la pestaña
+    console.log(message.oldTitle, ' → ', message.newTitle);
+});
+titleBuilder.addPart('Carta');
+// "La Buena Espina → La Buena Espina — Carta"
+titleBuilder.addPart('Pescados');
+// "La Buena Espina — Carta → La Buena Espina › Carta › Pescados"
+titleBuilder.addPart('Ceviches');
+// "La Buena Espina › Carta › Pescados → La Buena Espina › Carta › Pescados › Ceviches"
+titleBuilder.reset();
+// "La Buena Espina › Carta › Pescados › Ceviches → La Buena Espina"
+
+</script>
+</body>
+</html>

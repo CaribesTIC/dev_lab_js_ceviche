@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.getPrototypeOf</h1>
+  <p>Devuelve el prototype de un objeto.</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var siteTitle = Object.create(String.prototype, {
+    internalValue: {
+        enumerable: false,
+        writable: true,
+        configurable: false
+    }
+});
+
+function consoleShow(){
+    console.log('respuesta: ', Object.getPrototypeOf(siteTitle));
+}
+</script>
+</body>
+</html>

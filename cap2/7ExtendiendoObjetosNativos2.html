@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Extendiendo objetos nativos</h1>
+<p>
+De igual forma, si luego de haber extendido el <i>prototype</i> de 
+<code style="font-size:14px;">Object</code> se agrega
+una propiedad a un objeto plano con el mismo nombre de la nueva propiedad o
+método, el valor que devolverá será el de la propiedad del objeto plano. A este
+comportamiento se le denomina <i>property shadowing</i>:
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+
+<script>
+
+Object.prototype.superMethod = function() {
+    return 'instance of Object';
+};
+
+var obj = {
+    superMethod: 150
+};
+obj.superMethod(); // TypeError: Property 'superMethod' of object #<Object> is not a function
+
+
+</script>
+</body>
+</html>

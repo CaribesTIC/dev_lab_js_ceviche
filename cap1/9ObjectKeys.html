@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.keys</h1>
+  <p>Lista todas las propiedades de un objeto que sean enumerables.</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var siteTitle = Object.create(String.prototype, {
+    internalValue: {
+        enumerable: false,
+        writable: true,
+        configurable: true
+    }
+});
+
+function consoleShow(){
+
+    console.log('respuesta: ', Object.keys(siteTitle));     // []
+
+    Object.defineProperty(siteTitle, 'internalValue', {
+        enumerable: true
+    });
+
+    console.log('respuesta: ', Object.keys(siteTitle));   // ["internalValue"]
+}
+</script>
+</body>
+</html>

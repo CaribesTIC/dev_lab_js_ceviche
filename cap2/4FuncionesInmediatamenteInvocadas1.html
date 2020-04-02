@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones inmediatamente invocadas</h1>
+<p>
+Una función inmediatamente invocada <i>(Immediately-Invoked Function
+Expression - IIFE)</i> es una expresión que permite ejecutar una función anónima
+inmediatamente después de ser definida, lo cual hace que el valor devuelto por
+la expresión no sea la función en sí, si no el valor de su ejecución.
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>La función anónima de este ejemplo está encerrada por paréntesis, lo que
+permite tratarla como un objeto más.</p>
+<script>
+
+var sum = (function(a, b) {
+    return a + b;
+})(10, 15);
+
+
+console.log('respuesta: ', sum ); // 25
+
+</script>
+</body>
+</html>

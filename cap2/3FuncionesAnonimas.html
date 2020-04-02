@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones anónimas</h1>
+<p>
+Una función anónima es una función expresada con el operador 
+<code style="font-size:14px;">function</code>
+(forma B para crear funciones) y que no tiene nombre.
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<p>
+Este tipo de funciones suelen ser utilizadas como funciones inmediatamente
+invocadas y callbacks, ya que al ser una función sin nombre, se espera que sea de
+un solo uso.
+</p>
+<script>
+
+var nammedFunction = function funcionConNombre() {
+    return [this.nammedFunction, 'función con nombre'] ;
+};
+
+var anonymousFunction = function () {
+    return [anonymousFunction, 'función anónima'];
+};
+
+console.log('respuesta: ', nammedFunction() ); // "función con nombre"
+
+console.log('respuesta: ', anonymousFunction() ); // "función anónima"
+
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.defineProperties</h1>
+  <p>
+Crea o modifica propiedades para un objeto. En este caso el segundo parámetro
+es un objeto plano donde cada par nombre : valor corresponde al nombre de la
+propiedad y el descriptor de la misma.
+  </p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+var siteTitle = {};
+
+Object.defineProperties(siteTitle, {
+    internalValue: {
+        writable: true,    // internalValue podrá cambiar de valor
+        configurable: true,// internalValue podrá cambiar de valor y ser eliminado del objeto
+        enumerable: true // internalValue aparecerá en Object.keys o usando for..in
+    },
+    toTitle: {
+        writable: false, // el método toTitle no podrá cambiar de valor
+        configurable: false, // el método toTitle no podrá ser eliminado ni cambiado de valor,
+        enumerable: false, // el método toTitle no aparecerá en Object.keys o usando for..in
+        value: function() {
+            return this.internalValue.toUpperCase().split('').join(' ');
+        }
+    }
+});
+
+siteTitle.internalValue= '¡esta cadena será ampliada!..';
+
+function consoleShow(){
+    console.log('respuesta: ', siteTitle.toTitle(siteTitle.internalValue));// 1
+}
+</script>
+</body>
+</html>

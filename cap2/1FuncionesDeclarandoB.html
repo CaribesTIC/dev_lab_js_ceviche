@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones tipo B</h1>
+<p>
+B. Expresando una función, con el operador function:
+</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+<p>
+La forma A y B son similares en sintaxis. Sin embargo, la diferencia principal se
+da en cómo el navegador carga las funciones. En el primer caso, el navegador
+cargará todas las funciones declaradas y luego ejecutará el código en el orden en
+el que fue escrito, mientras que en el segundo caso, la función se cargará según
+la posición donde esté definida.
+</p>
+
+<script>
+var sum = function sum(a, b) {
+    return a + b;
+};
+
+function consoleShow() {    
+    console.log('respuesta: ', sum(1, 2) );
+}
+</script>
+</body>
+</html>

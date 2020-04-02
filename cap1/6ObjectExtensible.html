@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Object.preventExtensions</h1>
+  <p>Bloquea la capacidad del objeto de tener nuevas propiedades.</p>
+  <h2>Object.isExtensible</h2>
+  <p>Verifica si el objeto permite agregar nuevas propiedades.</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+
+<script>
+function consoleShow(){
+    var object = {};
+    console.log( 'respuesta: ', Object.isExtensible(object) ); // true
+    Object.preventExtensions(object);    
+    console.log( 'respuesta: ', Object.isExtensible(object) ); // false
+}
+</script>
+</body>
+</html>

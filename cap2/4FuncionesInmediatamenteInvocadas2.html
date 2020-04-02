@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones inmediatamente invocadas</h1>
+<p>
+La función anónima del ejemplo anterior está encerrada por paréntesis, lo que
+permite tratarla como un objeto más, de igual forma a que si esa misma función
+anónima esté asignada a una variable:
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<p>
+En el caso de una función inmediatamente invocada, la función anónima es
+ejecutada una sola vez, por lo que no hay motivo para ser guardada en una
+variable.
+</p>
+<script>
+
+var sumFn = function(a, b) {
+    return a + b;
+};
+
+
+console.log('respuesta: ', sumFn(10, 15) ); // 25
+
+</script>
+</body>
+</html>

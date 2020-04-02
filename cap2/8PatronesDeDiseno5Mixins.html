@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+<h2>Mixins</h2>
+<p>
+En la sección sobre <i>prototypes</i> creamos la función constructora <code style="font-size:14px;">Dish</code>,
+la cual permite recrear los platillos que ofrece La Buena Espina...
+<br/><br/>
+... Así mismo, creamos una nueva función llamada <code style="font-size:14px;">Beverage</code>,
+que servirá para modelar las distintas bebidas que ofrece el restaurante...
+<br/><br/>
+Pero el dueño de La Buena Espina quiere tener una calculadora en el sitio web,
+que permita saber cuánto gastará un posible cliente según lo que vaya a pedir, y
+para esto necesitamos que todos los items de la carta (en este caso, <code style="font-size:14px;">Dish</code> y
+<code style="font-size:14px;">Beverage</code>) tengan un método que agregue el precio a una calculadora.
+<br/><br/>
+Podríamos tener un <i>prototype</i> en común para ambos pero suena un poco
+forzado. ¿Cómo es que <code style="font-size:14px;">Dish</code> y 
+<code style="font-size:14px;">Beverage</code> podrían tener un objeto <i>padre</i> en
+común? Ambos necesitan el mismo comportamiento, pero son muy diferentes
+para compartir un <i>prototype</i>. Es aquí donde podemos usar un <i>mixin</i>.
+<br/><br/>
+Un <i>mixin</i> es una colección de métodos que pueden ser agregados a un objeto
+(generalmente al <i>prototype</i> de una función constructora) y así extender las
+funcionalidades que tiene dicho objeto. De esta forma podemos simular la
+herencia múltiple que el lenguaje no da por sí mismo (en JavaScript se maneja
+herencia simple al extender o reemplazar el <i>prototype</i> de una función):
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+La forma de usar un <i>mixin</i> es iterando en él (para eso utilizamos un 
+<code style="font-size:14px;">for..in</code> ) y añadiendo cada método del 
+<i>mixin</i> en el <i>prototype</i> destino. De esta forma, podemos agregar 
+un platillo a la calculadora...
+<br/><br/>
+Y calculando...
+</p>
+<script>
+
+function Dish(options) {
+    this.name = options.name;
+    this.ingredients = options.ingredients;
+    this.garnishes = options.garnishes;
+    this.diners = options.diners;
+};
+
+function Beverage(options) {
+    this.name = options.name;
+    this.quantity = options.quantity;
+};
+
+var CalculatorItems = [];
+
+var CalculatorMixin = {
+    addToCalculator: function(price, quantity) {
+        CalculatorItems.push({
+            name: this.name,
+            price: price,
+            subtotal: price * quantity
+        });
+    }
+};
+
+for (var mixinMethodName in CalculatorMixin) {
+   Dish.prototype[mixinMethodName] = CalculatorMixin[mixinMethodName];
+   Beverage.prototype[mixinMethodName] = CalculatorMixin[mixinMethodName];
+}
+
+var cevicheSimple = new Dish({
+    name: 'Ceviche simple',
+    diners: 4
+});
+
+cevicheSimple.addToCalculator(20, 1);
+
+var limonadaFrozen = new Beverage({
+    name: 'Limonada frozen',
+    quantity: '1 vaso'
+});
+
+limonadaFrozen.addToCalculator(7, 2);
+
+var total = 0;
+
+for (var i = 0; i < CalculatorItems.length; i++) {
+    total = total + CalculatorItems[i].subtotal;
+}
+
+// toFixed convierte un número a una cadena con determinado número de decimales
+
+console.log('Total:', 'S/.', total.toFixed(2)); // Total: S/. 34.00
+
+</script>
+</body>
+</html>

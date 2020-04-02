@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+El contexto dentro de una función puede cambiar de valor, de acuerdo a la forma
+cómo está definida la función y cómo se la ejecuta. El contexto es el “dueño” del
+ámbito de la función que se está ejecutando y se puede acceder a él mediante la
+palabra reservada <code style="font-size:14px;">this</code>.
+<br/><br/>
+El contexto cambia de valor según los siguientes casos:
+<br/><br/>
+A. Cuando se define una función como método de un objeto, el contexto de dicha
+función es el objeto:
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<script>
+
+var obj = { property: 'value' };
+
+obj.getValue = function() {
+    console.log('this context: ', this);
+    return this.property;
+};
+
+console.log('getValue.property: ', obj.getValue() );
+  
+// context: Object {property: "value", getValue: function} 
+// "value"
+
+</script>
+</body>
+</html>

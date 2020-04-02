@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Funciones tipo C</h1>
+<p>
+C. Creando una instancia del constructor Function:
+</p>
+  <button id="btn" onclick=consoleShow()>Abra la consola y pulse este botón...</button>
+<p>
+La forma C tiene la ventaja de permitir evaluar sentencias en tiempo de ejecución.
+Esto quiere decir que se pueden crear y ejecutar funciones a partir de datos que
+ingrese un usuario, como en el caso de una consola de JavaScript.
+</p>
+<script>
+var sum = new Function('a', 'b', 'return a + b');
+
+function consoleShow() {    
+    console.log('respuesta: ', sum(1, 2) );
+}
+</script>
+</body>
+</html>

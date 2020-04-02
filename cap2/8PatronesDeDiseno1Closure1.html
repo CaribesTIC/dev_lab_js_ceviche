@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Patrones de diseño</h1>
+<p>
+Debido al auge que ha tenido JavaScript en los últimos años se hizo necesario
+crear y aplicar técnicas probadas que permitan escribir mejor código y
+solucionar problemas comunes. Estas técnicas son llamadas patrones de diseño
+y representan uno de los pilares en cuanto al desarrollo tanto de JavaScript
+como lenguaje como del uso que se le da al momento de crear aplicaciones web
+del lado frontend y backend.
+</p>
+
+  <h2>Closure</h2>
+
+<p>
+Un closure en JavaScript es una función definida dentro de otra función,
+teniendo esta función (la función interna) acceso al ámbito (<i>scope</i>) de la función
+que la contiene (la función externa). En JavaScript este comportamiento no
+sucede a la inversa; es decir, una función externa no tiene acceso al ámbito de la
+función interna.
+</p>
+
+<h4>Abra la consola y observe el resultado</h4>
+
+<p>
+Este ejemplo tiene una función interna llamada <code style="font-size:14px;">getSeparator</code>, la cual tiene
+acceso al ámbito de la función externa ( <code style="font-size:14px;">buildTitle</code> ) y a sus argumentos
+( <code style="font-size:14px;">parts</code> ). En este caso el uso de <code style="font-size:14px;">getSeparator</code>
+se limita a crear el título del sitio, por lo que no es necesario hacer que <code style="font-size:14px;">buildTitle</code>
+la retorne (Las funciones, al ser <i>ciudadanos</i> de primera clase, pueden retornar otras funciones).
+</p>
+
+<script>
+
+function buildTitle(parts) {
+
+    var baseTitle = 'La Buena Espina';
+
+    function getSeparator() {
+
+        if (parts.length == 1) {
+            return ' — ';
+        } else {
+            return ' › ';
+        }
+
+    };
+
+    var separator = getSeparator();
+    parts.unshift(baseTitle);
+    return parts.join(separator);
+
+}
+
+console.log(buildTitle(['Carta'])); // "La Buena Espina — Carta"
+
+console.log(buildTitle(['Carta', 'Postres'])); // "La Buena Espina › Carta › Postres"
+
+</script>
+</body>
+</html>

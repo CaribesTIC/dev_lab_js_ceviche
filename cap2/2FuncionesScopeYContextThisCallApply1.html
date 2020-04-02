@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+En JavaScript se puede ejecutar una función y cambiar el contexto utilizando los
+métodos <code style="font-size:14px;">call</code> y <code style="font-size:14px;">apply</code>.
+Ambos métodos, que también son funciones, son similares en propósito, 
+pero difieren en el número y forma de sus parámetros.
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+
+<code style="font-size:14px;">call</code> y <code style="font-size:14px;">apply</code> 
+tienen como primer argumento el nuevo contexto de la función,
+el cual en este caso es null debido a que no es necesario tener un contexto
+definido para este ejemplo. Para el caso de call el resto de argumentos deben
+ser los mismos de la función al ser ejecutada, mientras que para el caso de
+apply solo toma un segundo argumento, un arreglo, el cual contiene todos los
+argumentos de la función a ejecutar.</p>
+
+<script>
+
+function buildSiteTitle(part1, part2) {
+    return part1 + ' — ' + part2;
+};
+console.log('respuesta: ', buildSiteTitle('La Buena Espina', 'Carta') );
+// "La Buena Espina — Ceviches" 
+console.log('respuesta: ', buildSiteTitle.call(null, 'La Buena Espina', 'Locales') );
+// "La Buena Espina — Locales"
+console.log('respuesta: ', buildSiteTitle.apply(null, ['La Buena Espina', 'Historia']) );
+// "La Buena Espina — Historia"
+
+</script>
+</body>
+</html>

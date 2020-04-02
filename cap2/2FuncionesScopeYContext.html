@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>object</title>
+</head>
+<body>
+  <h1>Scope y context</h1>
+<p>
+Una de las más grandes diferencias en JavaScript con respecto a los lenguajes de
+los cuales está infiuido es en el ámbito (scope) y en el contexto de función.
+<br/><br/>
+El ámbito de una variable es el lugar dentro de un programa en el cual dicha
+variable vive y por lo tanto, donde puede ser usada. El scope de una variable es a
+nivel de funciones, lo que significa que una variable definida dentro de una
+función (con la palabra reservada <code style="font-size:14px;">var</code> ) va a poder ser usada dentro de esa
+función, pero no fuera de la misma.
+<br/><br/>
+  <h2>Declarar Variables sin var</h2>
+Por otro lado, no es recomendable declarar variables sin <code style="font-size:14px;">var</code> ya que, si se omite
+esta palabra reservada, el programa buscará la variable en los ámbitos (o scopes)
+superiores hasta llegar al ámbito global. Si la variable existe, reemplaza su
+valor, y si no existe la crea en el ámbito global:
+</p>
+<h4>Abra la consola y observe el resultado</h4>
+<script>
+
+function globalFunction() {
+    function innerFunction() {
+        function deeperFunction() {
+            globalVar = 'globalVar'; // sin 'var', 'globalVar' se vuelve global
+        };
+        deeperFunction();
+        console.log('deeperFunction', globalVar); // deeperFunction globalVar
+    };
+    innerFunction();
+    console.log('innerFunction', globalVar); // innerFunction globalVar
+};
+globalFunction();
+console.log('globalFunction', globalVar); // globalFunction globalVar
+
+</script>
+</body>
+</html>
